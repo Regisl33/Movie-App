@@ -9,8 +9,16 @@ const App = () => {
   const [searchResult, setSearchResult] = useState("");
   const [topFlop, setTopFlop] = useState("");
   const [sortedMovie, setSortedMovie] = useState([]);
+  const [genreID, setGenreId] = useState([]);
+  const [favorite, setFavorite] = useState([]);
 
   const urlSearch = searchResult === "" ? "e" : searchResult;
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/genres")
+      .then((res) => setGenreId(res.data));
+  }, []);
 
   useEffect(() => {
     axios
@@ -36,6 +44,10 @@ const App = () => {
     }
   }, [searchResult, movieData, topFlop]);
 
+  useEffect(() => {
+    localStorage.favorites = favorite;
+  }, [favorite]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -48,12 +60,21 @@ const App = () => {
               topFlop={topFlop}
               setTopFlop={setTopFlop}
               sortedMovie={sortedMovie}
+              genreID={genreID}
+              favorite={favorite}
+              setFavorite={setFavorite}
             />
           }
         />
         <Route
           path="/coups-de-coeurs"
-          element={<Favorite />}
+          element={
+            <Favorite
+              genreID={genreID}
+              favorite={favorite}
+              setFavorite={setFavorite}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
