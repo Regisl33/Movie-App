@@ -2,11 +2,22 @@ import React from "react";
 import Header from "./Header";
 import Filters from "./Filters";
 
-const Main = () => {
+const Main = ({
+  searchResult,
+  setSearchResult,
+  topFlop,
+  setTopFlop,
+  sortedMovie,
+}) => {
   const content = (
     <main>
       <Header />
-      <Filters />
+      <Filters
+        searchResult={searchResult}
+        setSearchResult={setSearchResult}
+        topFlop={topFlop}
+        setTopFlop={setTopFlop}
+      />
     </main>
   );
 

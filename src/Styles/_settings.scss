@@ -1,6 +1,26 @@
 //Fonts
+@font-face {
+  font-family: "font1";
+  src: url(../Assets/Fonts/Dongle-Light.ttf);
+}
+@font-face {
+  font-family: "font2";
+  src: url(../Assets/Fonts/Dongle-Regular.ttf);
+}
+
+$lightFont: "font1", sans-serif;
+$regFont: "font2", sans-serif;
 
 //Colors
+$light01: rgb(255, 255, 255);
+$light02: rgb(238, 238, 238);
+$light02: rgb(238, 238, 238);
+$black: rgb(0, 0, 0);
+$main01: rgb(32, 32, 64);
+$main02: rgb(6, 13, 44);
+$main03: rgb(84, 111, 228);
+$main04: rgb(43, 48, 75);
+$main05: rgb(19, 25, 55);
 
 //Mixins
 @mixin justify($content) {
@@ -20,4 +40,7 @@
 body {
   text-align: center;
   min-height: 100vh;
+  font-family: $regFont;
+  background: $main01;
+  color: $light02;
 }

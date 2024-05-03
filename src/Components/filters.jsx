@@ -2,21 +2,37 @@ import React from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 
-const Filters = () => {
+const Filters = ({ searchResult, setSearchResult, topFlop, setTopFlop }) => {
   const searchBar = (
     <div className="search-bar">
-      <input type="text" id="search-bar" placeholder="Rechercher" />
+      <input
+        type="text"
+        id="search-bar"
+        placeholder="Rechercher"
+        value={searchResult}
+        onChange={(e) => setSearchResult(e.target.value)}
+      />
       <label id="search-bar">Rechercher</label>
     </div>
   );
 
-  const topFlop = (
+  const topFlopHTML = (
     <div className="topFlop">
-      <button>
+      <button
+        id="top"
+        onClick={(e) =>
+          topFlop === "top" ? setTopFlop("") : setTopFlop("top")
+        }
+      >
         Top
         <FaArrowUp />
       </button>
-      <button>
+      <button
+        id="flop"
+        onClick={(e) =>
+          topFlop === "flop" ? setTopFlop("") : setTopFlop("flop")
+        }
+      >
         Flop
         <FaArrowDown />
       </button>
@@ -26,7 +42,7 @@ const Filters = () => {
   const content = (
     <div className="filters">
       {searchBar}
-      {topFlop}
+      {topFlopHTML}
     </div>
   );
   return content;
