@@ -2,42 +2,44 @@ import React from "react";
 import { CiStar } from "react-icons/ci";
 import GenreList from "./GenreList";
 
-const Movie = ({ movie, genreID, favorite, setFavorite }) => {
+const Movie = ({ movie, genreID, favorite, setFavorite, mainDisplay }) => {
   let favoriteArray = [];
 
-  const updateFavorite = (id) => {
-    let uniqueItem = true;
+  const addFavorite = (id) => {
     favoriteArray = favorite;
-
-    console.log(favoriteArray);
-
-    if (favoriteArray.lenght == 0) {
-      favoriteArray.push(id);
-    } else {
-      favoriteArray.map((movie) =>
-        movie.id == id ? (uniqueItem = false) : null
-      );
-      console.log(uniqueItem);
-      if (uniqueItem) {
-        favoriteArray.push(id);
-      }
-    }
-
-    console.log(favoriteArray);
-
+    favoriteArray.push(id);
     setFavorite(favoriteArray);
+    localStorage.favorite = JSON.stringify(favorite);
   };
+
+  const removeFavorite = (id) => {
+    favoriteArray = favorite;
+    favoriteArray.filter((movie) => movie.id !== parseInt(id));
+    setFavorite(favoriteArray);
+    localStorage.favorite = JSON.stringify(favorite);
+  };
+
+  const pageContent =
+    mainDisplay === true ? (
+      <button onClick={() => addFavorite(movie.id)}>
+        Ajouter aux coups de coeur
+      </button>
+    ) : (
+      <button onClick={() => removeFavorite(movie.id)}>
+        Retirer des coups de coeur
+      </button>
+    );
 
   return (
     <div className="movie-card">
-      {/* <img
+      <img
         src={
           movie.backdrop_path
             ? "https://image.tmdb.org/t/p/original/" + movie.backdrop_path
             : "./poster.jpg"
         }
         alt={movie.title}
-      /> */}
+      />
       <h2>{movie.title}</h2>
       <p> Sortie le: {movie.release_date} </p>
       <h2>
@@ -54,9 +56,7 @@ const Movie = ({ movie, genreID, favorite, setFavorite }) => {
       </ul>
       <h2>Synopsis</h2>
       <p>{movie.overview}</p>
-      <button onClick={() => updateFavorite(movie.id)}>
-        Ajouter aux coups de coeur
-      </button>
+      {pageContent}
     </div>
   );
 };

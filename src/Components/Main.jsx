@@ -12,6 +12,8 @@ const Main = ({
   genreID,
   favorite,
   setFavorite,
+  mainDisplay,
+  setMainDisplay,
 }) => {
   const pageContent = sortedMovie.slice(0, 12).map((movie) => (
     <Movie
@@ -20,12 +22,13 @@ const Main = ({
       genreID={genreID}
       favorite={favorite}
       setFavorite={setFavorite}
+      mainDisplay={mainDisplay}
     />
   ));
 
   const content = (
     <main>
-      <Header />
+      <Header setMainDisplay={setMainDisplay} />
       <Filters
         searchResult={searchResult}
         setSearchResult={setSearchResult}

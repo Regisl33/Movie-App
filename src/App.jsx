@@ -11,6 +11,7 @@ const App = () => {
   const [sortedMovie, setSortedMovie] = useState([]);
   const [genreID, setGenreId] = useState([]);
   const [favorite, setFavorite] = useState([]);
+  const [mainDisplay, setMainDisplay] = useState(true);
 
   const urlSearch = searchResult === "" ? "e" : searchResult;
 
@@ -18,6 +19,10 @@ const App = () => {
     axios
       .get("http://localhost:3000/genres")
       .then((res) => setGenreId(res.data));
+
+    if (localStorage.favorite) {
+      setFavorite(JSON.parse(localStorage.favorite));
+    }
   }, []);
 
   useEffect(() => {
@@ -44,10 +49,6 @@ const App = () => {
     }
   }, [searchResult, movieData, topFlop]);
 
-  useEffect(() => {
-    localStorage.favorites = favorite;
-  }, [favorite]);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -63,6 +64,8 @@ const App = () => {
               genreID={genreID}
               favorite={favorite}
               setFavorite={setFavorite}
+              mainDisplay={mainDisplay}
+              setMainDisplay={setMainDisplay}
             />
           }
         />
@@ -73,6 +76,8 @@ const App = () => {
               genreID={genreID}
               favorite={favorite}
               setFavorite={setFavorite}
+              mainDisplay={mainDisplay}
+              setMainDisplay={setMainDisplay}
             />
           }
         />
