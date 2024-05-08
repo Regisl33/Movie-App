@@ -11,12 +11,17 @@ export const initState = {
 export const reducer = (state, action) => {
   switch (action.type) {
     case "setMovieData": {
-      return { ...state, movieData: action.payload };
+      return {
+        ...state,
+        movieData: action.payload,
+        sortedMovie: action.payload,
+      };
     }
     case "setGenreID": {
       return { ...state, genreID: action.payload };
     }
     case "setFavorite": {
+      localStorage.favorite = JSON.stringify(action.payload);
       return { ...state, favorite: action.payload };
     }
     case "setTopFlop": {

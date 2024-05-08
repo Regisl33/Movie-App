@@ -18,7 +18,7 @@ const Movie = ({ movie, state, dispatch }) => {
   };
 
   const pageContent =
-    mainDisplay === true ? (
+    state.mainDisplay === true ? (
       <button onClick={() => addFavorite(movie.id)}>
         Ajouter aux coups de coeur
       </button>
