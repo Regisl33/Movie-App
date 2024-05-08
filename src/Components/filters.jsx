@@ -2,15 +2,17 @@ import React from "react";
 import { FaArrowDown } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 
-const Filters = ({ searchResult, setSearchResult, topFlop, setTopFlop }) => {
+const Filters = ({ state, dispatch }) => {
   const searchBar = (
     <div className="search-bar">
       <input
         type="text"
         id="search-bar"
         placeholder="Rechercher"
-        value={searchResult}
-        onChange={(e) => setSearchResult(e.target.value)}
+        value={state.searchResult}
+        onChange={(e) =>
+          dispatch({ type: "setSearchResult", payload: e.target.value })
+        }
       />
       <label id="search-bar">Rechercher</label>
     </div>
@@ -19,18 +21,22 @@ const Filters = ({ searchResult, setSearchResult, topFlop, setTopFlop }) => {
   const topFlopHTML = (
     <div className="topFlop">
       <button
-        id="top"
-        onClick={(e) =>
-          topFlop === "top" ? setTopFlop("") : setTopFlop("top")
+        onClick={() =>
+          dispatch({
+            type: "setTopFlop",
+            payload: state.topFlop === "top" ? "" : "top",
+          })
         }
       >
         Top
         <FaArrowUp />
       </button>
       <button
-        id="flop"
-        onClick={(e) =>
-          topFlop === "flop" ? setTopFlop("") : setTopFlop("flop")
+        onClick={() =>
+          dispatch({
+            type: "setTopFlop",
+            payload: state.topFlop === "flop" ? "" : "flop",
+          })
         }
       >
         Flop

@@ -2,21 +2,19 @@ import React from "react";
 import { CiStar } from "react-icons/ci";
 import GenreList from "./GenreList";
 
-const Movie = ({ movie, genreID, favorite, setFavorite, mainDisplay }) => {
+const Movie = ({ movie, state, dispatch }) => {
   let favoriteArray = [];
 
   const addFavorite = (id) => {
-    favoriteArray = favorite;
+    favoriteArray = state.favorite;
     favoriteArray.push(id);
-    setFavorite(favoriteArray);
-    localStorage.favorite = JSON.stringify(favorite);
+    dispatch({ type: "setFavorite", payload: favoriteArray });
   };
 
   const removeFavorite = (id) => {
-    favoriteArray = favorite;
+    favoriteArray = state.favorite;
     favoriteArray.filter((movie) => movie.id !== parseInt(id));
-    setFavorite(favoriteArray);
-    localStorage.favorite = JSON.stringify(favorite);
+    dispatch({ type: "setFavorite", payload: favoriteArray });
   };
 
   const pageContent =
@@ -50,7 +48,7 @@ const Movie = ({ movie, genreID, favorite, setFavorite, mainDisplay }) => {
           <GenreList
             key={id}
             id={id}
-            genreID={genreID}
+            state={state}
           />
         ))}
       </ul>

@@ -3,37 +3,22 @@ import Header from "./Header";
 import Filters from "./Filters";
 import Movie from "./Movie";
 
-const Main = ({
-  searchResult,
-  setSearchResult,
-  topFlop,
-  setTopFlop,
-  sortedMovie,
-  genreID,
-  favorite,
-  setFavorite,
-  mainDisplay,
-  setMainDisplay,
-}) => {
-  const pageContent = sortedMovie.slice(0, 12).map((movie) => (
+const Main = ({ state, dispatch }) => {
+  const pageContent = state.sortedMovie.slice(0, 12).map((movie) => (
     <Movie
       key={movie.id}
       movie={movie}
-      genreID={genreID}
-      favorite={favorite}
-      setFavorite={setFavorite}
-      mainDisplay={mainDisplay}
+      state={state}
+      dispatch={dispatch}
     />
   ));
 
   const content = (
     <main>
-      <Header setMainDisplay={setMainDisplay} />
+      <Header dispatch={dispatch} />
       <Filters
-        searchResult={searchResult}
-        setSearchResult={setSearchResult}
-        topFlop={topFlop}
-        setTopFlop={setTopFlop}
+        state={state}
+        dispatch={dispatch}
       />
       {pageContent}
     </main>

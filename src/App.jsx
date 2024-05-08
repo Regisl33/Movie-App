@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import Main from "./Components/Main";
 import Favorite from "./Components/Favorite";
+import { initState, reducer } from "./Reducer/Reducer";
 
 const App = () => {
-  const [movieData, setMovieData] = useState([]);
-  const [searchResult, setSearchResult] = useState("");
-  const [topFlop, setTopFlop] = useState("");
-  const [sortedMovie, setSortedMovie] = useState([]);
-  const [genreID, setGenreId] = useState([]);
-  const [favorite, setFavorite] = useState([]);
-  const [mainDisplay, setMainDisplay] = useState(true);
+  const [state, dispatch] = useReducer(reducer, initState);
 
-  const urlSearch = searchResult === "" ? "e" : searchResult;
+  const urlSearch = state.searchResult === "" ? "e" : state.searchResult;
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/genres")
-      .then((res) => setGenreId(res.data));
+      .then((res) => dispatch({ type: "setGenreID", payload: res.data }));
 
     if (localStorage.favorite) {
-      setFavorite(JSON.parse(localStorage.favorite));
+      dispatch({
+        type: "setFavorite",
+        payload: JSON.parse(localStorage.favorite),
+      });
     }
   }, []);
 
@@ -32,22 +30,10 @@ const App = () => {
           urlSearch +
           "&language=fr-FR"
       )
-      .then((res) => setMovieData(res.data.results));
-  }, [searchResult]);
-
-  useEffect(() => {
-    if (topFlop === "") {
-      setSortedMovie(movieData);
-    } else {
-      topFlop === "top"
-        ? setSortedMovie(
-            movieData.sort((a, b) => b.vote_average - a.vote_average)
-          )
-        : setSortedMovie(
-            movieData.sort((a, b) => a.vote_average - b.vote_average)
-          );
-    }
-  }, [searchResult, movieData, topFlop]);
+      .then((res) =>
+        dispatch({ type: "setMovieData", payload: res.data.results })
+      );
+  }, [state.searchResult]);
 
   return (
     <BrowserRouter>
@@ -56,16 +42,8 @@ const App = () => {
           path="/"
           element={
             <Main
-              searchResult={searchResult}
-              setSearchResult={setSearchResult}
-              topFlop={topFlop}
-              setTopFlop={setTopFlop}
-              sortedMovie={sortedMovie}
-              genreID={genreID}
-              favorite={favorite}
-              setFavorite={setFavorite}
-              mainDisplay={mainDisplay}
-              setMainDisplay={setMainDisplay}
+              state={state}
+              dispatch={dispatch}
             />
           }
         />
@@ -73,11 +51,8 @@ const App = () => {
           path="/coups-de-coeurs"
           element={
             <Favorite
-              genreID={genreID}
-              favorite={favorite}
-              setFavorite={setFavorite}
-              mainDisplay={mainDisplay}
-              setMainDisplay={setMainDisplay}
+              state={state}
+              dispatch={dispatch}
             />
           }
         />

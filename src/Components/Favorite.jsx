@@ -3,22 +3,15 @@ import Header from "./Header";
 import axios from "axios";
 import Movie from "./Movie";
 
-const Favorite = ({
-  genreID,
-  favorite,
-  setFavorite,
-  mainDisplay,
-  setMainDisplay,
-}) => {
+const Favorite = ({ state, dispatch }) => {
   const favoriteMovieArray = [];
-  const newArray = [];
 
   const removeDuplicate = (arr) => {
     return arr.filter((item, index) => arr.indexOf(item) === index);
   };
 
   useEffect(() => {
-    const newArray = removeDuplicate(favorite);
+    const newArray = removeDuplicate(state.favorite);
 
     console.log(newArray);
 
@@ -33,19 +26,17 @@ const Favorite = ({
           .then((res) => favoriteMovieArray.push(res.data))
       );
     }
-  }, [favorite]);
+  }, [state.favorite]);
 
   const content = (
     <main>
-      <Header setMainDisplay={setMainDisplay} />
+      <Header dispatch={dispatch} />
       {favoriteMovieArray &&
         favoriteMovieArray.map((movie) => (
           <Movie
             movie={movie}
-            genreID={genreID}
-            favorite={favorite}
-            setFavorite={setFavorite}
-            mainDisplay={mainDisplay}
+            state={state}
+            dispatch={dispatch}
           />
         ))}
     </main>
