@@ -44,13 +44,13 @@ const Movie = ({ movie, state, dispatch }) => {
         {Math.round(movie.vote_average * 10) / 10} /10 <CiStar />
       </h2>
       <ul>
-        {movie.genre_ids.map((id) => (
-          <GenreList
-            key={id}
-            id={id}
-            state={state}
-          />
-        ))}
+        {state.mainDisplay
+          ? movie.genre_ids.map((id) => (
+              <GenreList key={id} id={id} state={state} />
+            ))
+          : movie.genres.map((id) => (
+              <GenreList key={id} id={id} state={state} />
+            ))}
       </ul>
       <h2>Synopsis</h2>
       <p>{movie.overview}</p>
