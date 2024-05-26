@@ -14,7 +14,7 @@ $regFont: "font2", sans-serif;
 //Colors
 $light01: rgb(255, 255, 255);
 $light02: rgb(238, 238, 238);
-$light02: rgb(238, 238, 238);
+$light03: rgb(150, 150, 150);
 $black: rgb(0, 0, 0);
 $main01: rgb(32, 32, 64);
 $main02: rgb(6, 13, 44);
@@ -39,6 +39,7 @@ $main05: rgb(19, 25, 55);
 }
 body {
   text-align: center;
+  font-size: 1.1rem;
   min-height: 100vh;
   font-family: $regFont;
   background: $main01;

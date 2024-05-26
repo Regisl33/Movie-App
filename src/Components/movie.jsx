@@ -38,23 +38,25 @@ const Movie = ({ movie, state, dispatch }) => {
         }
         alt={movie.title}
       />
-      <h2>{movie.title}</h2>
-      <p> Sortie le: {movie.release_date} </p>
-      <h2>
-        {Math.round(movie.vote_average * 10) / 10} /10 <CiStar />
-      </h2>
-      <ul>
-        {movie.genre_ids.map((id) => (
-          <GenreList
-            key={id}
-            id={id}
-            state={state}
-          />
-        ))}
-      </ul>
-      <h2>Synopsis</h2>
-      <p>{movie.overview}</p>
-      {pageContent}
+      <div className="movie-infos">
+        <h2>{movie.title}</h2>
+        <p> Sortie le: {movie.release_date} </p>
+        <h2>
+          {Math.round(movie.vote_average * 10) / 10} /10 <CiStar />
+        </h2>
+        <ul>
+          {movie.genre_ids.map((id) => (
+            <GenreList
+              key={id}
+              id={id}
+              state={state}
+            />
+          ))}
+        </ul>
+        <h2>Synopsis</h2>
+        <p className="overview">{movie.overview}</p>
+        {pageContent}
+      </div>
     </div>
   );
 };

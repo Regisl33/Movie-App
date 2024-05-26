@@ -20,7 +20,7 @@ const Main = ({ state, dispatch }) => {
         state={state}
         dispatch={dispatch}
       />
-      {pageContent}
+      <div className="movieDisplay">{pageContent}</div>
     </main>
   );
 

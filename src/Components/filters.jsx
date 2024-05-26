@@ -21,6 +21,7 @@ const Filters = ({ state, dispatch }) => {
   const topFlopHTML = (
     <div className="topFlop">
       <button
+        className="topBtn"
         onClick={() =>
           dispatch({
             type: "setTopFlop",
@@ -32,6 +33,7 @@ const Filters = ({ state, dispatch }) => {
         <FaArrowUp />
       </button>
       <button
+        className="flopBtn"
         onClick={() =>
           dispatch({
             type: "setTopFlop",
@@ -39,8 +41,8 @@ const Filters = ({ state, dispatch }) => {
           })
         }
       >
-        Flop
         <FaArrowDown />
+        Flop
       </button>
     </div>
   );

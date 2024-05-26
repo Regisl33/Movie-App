@@ -1,5 +1,30 @@
-nav {
-  ul {
-    @include justify(center);
+header {
+  @include justify(center);
+  position: relative;
+
+  nav {
+    position: absolute;
+    top: 12px;
+    left: 5px;
+
+    ul {
+      @include justify(center);
+
+      a,
+      a:visited {
+        font-size: 1.3rem;
+        padding: 2px 30px;
+        color: $light02;
+        text-decoration: none;
+        border-radius: 10px;
+      }
+      .active {
+        background: $main03;
+      }
+    }
+  }
+  h1 {
+    font-size: 3.5rem;
+    text-shadow: -1px 3px 3px $main03;
   }
 }

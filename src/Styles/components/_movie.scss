@@ -1,0 +1,67 @@
+.movieDisplay {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  width: 90%;
+
+  .movie-card {
+    background: $main02;
+    flex: 1 0 20%;
+    margin: 5px;
+    border-radius: 35px;
+    padding: 35px 15px;
+
+    img {
+      height: 250px;
+      width: 75%;
+      object-fit: cover;
+      border-radius: 35px;
+      box-shadow: 0px 9px 0px $main04, 0px 18px 0px $main05;
+      margin-bottom: 15px;
+    }
+    .movie-infos {
+      text-align: left;
+
+      h2 {
+        font-size: 1.5rem;
+        @include justify(start);
+
+        svg {
+          margin: 0 5px;
+        }
+      }
+      p {
+        color: $light03;
+      }
+      ul {
+        @include justify(start);
+
+        li {
+          margin: 5px;
+          padding: 3px 6px;
+          background: $main04;
+          border-radius: 15px;
+        }
+      }
+      .overview {
+        font-size: 1.2rem;
+        line-height: 22px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+        overflow: hidden;
+      }
+      button {
+        background: $main03;
+        border: none;
+        display: block;
+        margin: 0 auto;
+        width: 80%;
+        padding: 20px;
+        color: $light01;
+        border-radius: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+}

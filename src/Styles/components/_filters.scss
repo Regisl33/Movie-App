@@ -1,0 +1,58 @@
+.filters {
+  .search-bar {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    margin: 0 auto;
+    width: 15%;
+    border-radius: 10px;
+
+    input {
+      border: none;
+      border-radius: 10px 10px 0 0;
+      width: 100%;
+      text-align: center;
+      background: $light01;
+      font-size: 1rem;
+      padding: 5px;
+      color: $black;
+
+      &::placeholder {
+        color: $black;
+      }
+    }
+    label {
+      background: $main03;
+      border-radius: 0 0 10px 10px;
+      width: 100%;
+      font-size: 1.5rem;
+    }
+  }
+
+  .topFlop {
+    background: $main03;
+    border-radius: 15px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin: 10px auto;
+    width: 15%;
+
+    button {
+      background: none;
+      border: none;
+      color: $light02;
+      padding: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+
+      svg {
+        margin: 0 10px;
+      }
+    }
+    .topBtn {
+      text-align: right;
+    }
+    .flopBtn {
+      text-align: left;
+    }
+  }
+}
