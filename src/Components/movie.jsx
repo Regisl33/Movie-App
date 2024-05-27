@@ -13,8 +13,8 @@ const Movie = ({ movie, state, dispatch }) => {
 
   const removeFavorite = (id) => {
     favoriteArray = state.favorite;
-    favoriteArray.filter((movie) => movie.id !== parseInt(id));
-    dispatch({ type: "setFavorite", payload: favoriteArray });
+    let newArray = favoriteArray.filter((movie) => movie.id !== id);
+    dispatch({ type: "setFavorite", payload: newArray });
   };
 
   const pageContent =
@@ -29,7 +29,7 @@ const Movie = ({ movie, state, dispatch }) => {
     );
 
   return (
-    <div className="movie-card">
+    <div className="movie-card" key={movie.id}>
       <img
         src={
           movie.backdrop_path
@@ -45,13 +45,11 @@ const Movie = ({ movie, state, dispatch }) => {
           {Math.round(movie.vote_average * 10) / 10} /10 <CiStar />
         </h2>
         <ul>
-          {movie.genre_ids.map((id) => (
-            <GenreList
-              key={id}
-              id={id}
-              state={state}
-            />
-          ))}
+          {state.mainDisplay
+            ? movie.genre_ids.map((id) => (
+                <GenreList key={id} id={id} state={state} />
+              ))
+            : movie.genres.map((genre) => <li key={genre.id}>{genre.name}</li>)}
         </ul>
         <h2>Synopsis</h2>
         <p className="overview">{movie.overview}</p>

@@ -33,11 +33,13 @@ const Favorite = ({ state, dispatch }) => {
   const content = (
     <main>
       <Header dispatch={dispatch} />
-      {favoriteMovieArray.length > 0
-        ? favoriteMovieArray.map((movie) => (
-            <Movie movie={movie} state={state} dispatch={dispatch} />
-          ))
-        : null}
+      <div className="favorite-movies">
+        {favoriteMovieArray.length > 0
+          ? favoriteMovieArray.map((movie) => (
+              <Movie movie={movie} state={state} dispatch={dispatch} />
+            ))
+          : null}
+      </div>
     </main>
   );
   return content;
