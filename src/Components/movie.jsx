@@ -3,33 +3,24 @@ import { CiStar } from "react-icons/ci";
 import GenreList from "./GenreList";
 
 const Movie = ({ movie, state, dispatch }) => {
-  let favoriteArray = [];
-
-  const addFavorite = (id) => {
-    favoriteArray = state.favorite;
-    favoriteArray.push(id);
-    dispatch({ type: "setFavorite", payload: favoriteArray });
-  };
-
-  const removeFavorite = (id) => {
-    favoriteArray = state.favorite;
-    let newArray = favoriteArray.filter((movie) => movie.id !== id);
-    dispatch({ type: "setFavorite", payload: newArray });
-  };
-
   const pageContent =
-    state.mainDisplay === true ? (
-      <button onClick={() => addFavorite(movie.id)}>
-        Ajouter aux coups de coeur
+    window.location.pathname === "/coups-de-coeurs" ? (
+      <button
+        onClick={() => dispatch({ type: "removeFavorite", payload: movie.id })}
+      >
+        Retirer des coups de coeur
       </button>
     ) : (
-      <button onClick={() => removeFavorite(movie.id)}>
-        Retirer des coups de coeur
+      <button onClick={() => dispatch({ type: "addFavorite", payload: movie })}>
+        Ajouter aux coups de coeur
       </button>
     );
 
   return (
-    <div className="movie-card" key={movie.id}>
+    <div
+      className="movie-card"
+      key={movie.id}
+    >
       <img
         src={
           movie.backdrop_path
@@ -45,11 +36,13 @@ const Movie = ({ movie, state, dispatch }) => {
           {Math.round(movie.vote_average * 10) / 10} /10 <CiStar />
         </h2>
         <ul>
-          {state.mainDisplay
-            ? movie.genre_ids.map((id) => (
-                <GenreList key={id} id={id} state={state} />
-              ))
-            : movie.genres.map((genre) => <li key={genre.id}>{genre.name}</li>)}
+          {movie.genre_ids.map((id) => (
+            <GenreList
+              key={id}
+              id={id}
+              state={state}
+            />
+          ))}
         </ul>
         <h2>Synopsis</h2>
         <p className="overview">{movie.overview}</p>

@@ -26,6 +26,10 @@
       h2 {
         font-size: 1.5rem;
         @include justify(start);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
 
         svg {
           margin: 0 5px;

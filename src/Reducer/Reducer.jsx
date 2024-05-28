@@ -5,7 +5,6 @@ export const initState = {
   favorite: [],
   topFlop: "",
   searchResult: "",
-  mainDisplay: true,
 };
 
 export const reducer = (state, action) => {
@@ -23,6 +22,19 @@ export const reducer = (state, action) => {
     case "setFavorite": {
       localStorage.favorite = JSON.stringify(action.payload);
       return { ...state, favorite: action.payload };
+    }
+    case "addFavorite": {
+      let newArrayAdd = state.favorite;
+      newArrayAdd.push(action.payload);
+      localStorage.favorite = JSON.stringify(newArrayAdd);
+      return { ...state, favorite: newArrayAdd };
+    }
+    case "removeFavorite": {
+      let newArrayDel = state.favorite.filter(
+        (movie) => movie.id === action.payload
+      );
+      localStorage.favorite = JSON.stringify(newArrayDel);
+      return { ...state, favorite: newArrayDel };
     }
     case "setTopFlop": {
       if (action.payload === "top") {
@@ -45,9 +57,6 @@ export const reducer = (state, action) => {
     }
     case "setSearchResult": {
       return { ...state, searchResult: action.payload };
-    }
-    case "setMainDisplay": {
-      return { ...state, mainDisplay: action.payload };
     }
     default:
       throw new Error("unknown reducer action" + action.type);
