@@ -3,13 +3,9 @@ import Header from "./Header";
 import Movie from "./Movie";
 
 const Favorite = ({ state, dispatch }) => {
-  const removeDuplicate = (arr) => {
-    return arr.filter((item, index) => arr.indexOf(item) === index);
-  };
-
   const content = (
     <main>
-      <Header dispatch={dispatch} />
+      <Header />
       <div className="favorite-movies">
         {state.favorite.length > 0
           ? state.favorite.map((movie) => (

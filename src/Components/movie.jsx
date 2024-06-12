@@ -17,10 +17,7 @@ const Movie = ({ movie, state, dispatch }) => {
     );
 
   return (
-    <div
-      className="movie-card"
-      key={movie.id}
-    >
+    <div className="movie-card" key={movie.id}>
       <img
         src={
           movie.backdrop_path
@@ -37,11 +34,7 @@ const Movie = ({ movie, state, dispatch }) => {
         </h2>
         <ul>
           {movie.genre_ids.map((id) => (
-            <GenreList
-              key={id}
-              id={id}
-              state={state}
-            />
+            <GenreList key={id} id={id} state={state} />
           ))}
         </ul>
         <h2>Synopsis</h2>

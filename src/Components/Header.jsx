@@ -1,25 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Header = ({ dispatch }) => {
+const Header = () => {
   const title = <h1 className="title">React Movies</h1>;
 
   const navigation = (
     <nav>
       <ul>
         <NavLink to="/">
-          <li
-            onClick={() => dispatch({ type: "setMainDisplay", payload: true })}
-          >
-            Acceuil
-          </li>
+          <li>Acceuil</li>
         </NavLink>
         <NavLink to="/coups-de-coeurs">
-          <li
-            onClick={() => dispatch({ type: "setMainDisplay", payload: false })}
-          >
-            Coups de Coeurs
-          </li>
+          <li>Coups de Coeurs</li>
         </NavLink>
       </ul>
     </nav>

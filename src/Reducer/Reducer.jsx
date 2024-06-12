@@ -25,13 +25,23 @@ export const reducer = (state, action) => {
     }
     case "addFavorite": {
       let newArrayAdd = state.favorite;
-      newArrayAdd.push(action.payload);
+      if (newArrayAdd.length > 0) {
+        let uniqueItem = true;
+        newArrayAdd.map((movie) =>
+          movie.id === action.payload.id ? (uniqueItem = false) : null
+        );
+        if (uniqueItem) {
+          newArrayAdd.push(action.payload);
+        }
+      } else {
+        newArrayAdd.push(action.payload);
+      }
       localStorage.favorite = JSON.stringify(newArrayAdd);
       return { ...state, favorite: newArrayAdd };
     }
     case "removeFavorite": {
       let newArrayDel = state.favorite.filter(
-        (movie) => movie.id === action.payload
+        (movie) => movie.id !== action.payload
       );
       localStorage.favorite = JSON.stringify(newArrayDel);
       return { ...state, favorite: newArrayDel };
