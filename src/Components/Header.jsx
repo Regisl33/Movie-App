@@ -2,8 +2,9 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const Header = () => {
+  //Return Title H1
   const title = <h1 className="title">React Movies</h1>;
-
+  //Return Full Nav Logic
   const navigation = (
     <nav>
       <ul>
@@ -16,7 +17,7 @@ const Header = () => {
       </ul>
     </nav>
   );
-
+  //Return Full Header
   const content = (
     <header>
       {navigation}

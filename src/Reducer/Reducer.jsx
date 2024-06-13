@@ -9,6 +9,7 @@ export const initState = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    //Set Fetch Data in the State
     case "setMovieData": {
       return {
         ...state,
@@ -16,13 +17,16 @@ export const reducer = (state, action) => {
         sortedMovie: action.payload,
       };
     }
+    //Set Genre Data in the State
     case "setGenreID": {
       return { ...state, genreID: action.payload };
     }
+    //Set the Favorites in the State from Local Storage
     case "setFavorite": {
       localStorage.favorite = JSON.stringify(action.payload);
       return { ...state, favorite: action.payload };
     }
+    //Add a New Favorite
     case "addFavorite": {
       let newArrayAdd = state.favorite;
       if (newArrayAdd.length > 0) {
@@ -39,6 +43,7 @@ export const reducer = (state, action) => {
       localStorage.favorite = JSON.stringify(newArrayAdd);
       return { ...state, favorite: newArrayAdd };
     }
+    //Remove a Favorite
     case "removeFavorite": {
       let newArrayDel = state.favorite.filter(
         (movie) => movie.id !== action.payload
@@ -46,6 +51,7 @@ export const reducer = (state, action) => {
       localStorage.favorite = JSON.stringify(newArrayDel);
       return { ...state, favorite: newArrayDel };
     }
+    //Sort Movie By Top/Flop Selection
     case "setTopFlop": {
       if (action.payload === "top") {
         const newArray = state.movieData.sort(
@@ -65,9 +71,11 @@ export const reducer = (state, action) => {
         };
       }
     }
+    //Set the Search Result in the State
     case "setSearchResult": {
       return { ...state, searchResult: action.payload };
     }
+    //Default Error Message
     default:
       throw new Error("unknown reducer action" + action.type);
   }

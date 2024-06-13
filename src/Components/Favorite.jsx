@@ -3,6 +3,7 @@ import Header from "./Header";
 import Movie from "./Movie";
 
 const Favorite = ({ state, dispatch }) => {
+  //Return of the Favorite Page and Display of the Favorite Logic
   const content = (
     <main>
       <Header />

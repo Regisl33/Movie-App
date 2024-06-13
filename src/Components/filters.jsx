@@ -48,7 +48,7 @@ const Filters = ({ state, dispatch }) => {
   );
 
   const content = (
-    <div className="filters">
+    <div>
       {searchBar}
       {topFlopHTML}
     </div>

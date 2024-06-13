@@ -6,10 +6,11 @@ import Favorite from "./Components/Favorite";
 import { initState, reducer } from "./Reducer/Reducer";
 
 const App = () => {
+  //Init Reducer
   const [state, dispatch] = useReducer(reducer, initState);
-
+  //Define Search Url
   const urlSearch = state.searchResult === "" ? "e" : state.searchResult;
-
+  //Init Genre Date and Local Storage Favorites
   useEffect(() => {
     axios
       .get("http://localhost:3000/genres")
@@ -22,7 +23,7 @@ const App = () => {
       });
     }
   }, []);
-
+  //Fetch Movie By Search
   useEffect(() => {
     axios
       .get(
@@ -34,27 +35,14 @@ const App = () => {
         dispatch({ type: "setMovieData", payload: res.data.results })
       );
   }, [state.searchResult]);
-
+  //Return of React Router
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Main
-              state={state}
-              dispatch={dispatch}
-            />
-          }
-        />
+        <Route path="/" element={<Main state={state} dispatch={dispatch} />} />
         <Route
           path="/coups-de-coeurs"
-          element={
-            <Favorite
-              state={state}
-              dispatch={dispatch}
-            />
-          }
+          element={<Favorite state={state} dispatch={dispatch} />}
         />
       </Routes>
     </BrowserRouter>

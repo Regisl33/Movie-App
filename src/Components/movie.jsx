@@ -3,6 +3,7 @@ import { CiStar } from "react-icons/ci";
 import GenreList from "./GenreList";
 
 const Movie = ({ movie, state, dispatch }) => {
+  //Button Logic Display
   const pageContent =
     window.location.pathname === "/coups-de-coeurs" ? (
       <button
@@ -15,7 +16,7 @@ const Movie = ({ movie, state, dispatch }) => {
         Ajouter aux coups de coeur
       </button>
     );
-
+  //Html Return of the Movie Card
   return (
     <div className="movie-card" key={movie.id}>
       <img
